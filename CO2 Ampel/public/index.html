@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script>
+        function renderData(data){
+            let timestampColumn = document.getElementById("timestampColumn");
+            let co2Column = document.getElementById("co2Column");
+            let tempColumn = document.getElementById("tempColumn");
+            let humidityColumn = document.getElementById("humidityColumn");
+
+            timestampColumn.innerHTML = "";
+            co2Column.innerHTML = "";
+            tempColumn.innerHTML = "";
+            humidityColumn.innerHTML = "";
+
+            for(let element in data.timestamp){
+                let newEL = document.createElement("div")
+                newEL.textContent = new Date(data.timestamp[element]).toUTCString();
+                timestampColumn.appendChild(newEL);
+            }
+
+            for(let element in data.co2){
+                let newEL = document.createElement("div")
+                newEL.textContent = data.co2[element].toString();
+                co2Column.appendChild(newEL);
+            }
+
+            for(let element in data.temp){
+                let newEL = document.createElement("div")
+                newEL.textContent = data.temp[element].toString();
+                tempColumn.appendChild(newEL);
+            }
+
+            for(let element in data.humidity){
+                let newEL = document.createElement("div")
+                newEL.textContent = data.humidity[element].toString();
+                humidityColumn.appendChild(newEL);
+            }
+        }
+
+        function fetchData(){
+            fetch("/api/data").then((data) => {
+                return data.json();
+            }).then((data) => {
+                renderData(data);
+            });
+        }
+
+        window.onload = function() {
+            fetchData();
+            setInterval(fetchData, 5000);
+        }
+    </script>
+</head>
+<body>
+<h1>CO2 Ampel</h1>
+<div class="dataWrapper">
+    <div id="dataContainer">
+        <div id="headerTable" class="table">
+            <div><div>Timestamp</div></div>
+            <div><div>CO2</div></div>
+            <div><div>Temperatur</div></div>
+            <div><div>Feuchtigkeit</div></div>
+        </div>
+        <div id="dataTable" class="table">
+            <div id="timestampColumn"></div>
+            <div id="co2Column"></div>
+            <div id="tempColumn"></div>
+            <div id="humidityColumn"></div>
+        </div>
+    </div>
+    <div>
+        <div id="ampel">
+            <div class="red"></div>
+            <div class="yellow"></div>
+            <div class="green enabled"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

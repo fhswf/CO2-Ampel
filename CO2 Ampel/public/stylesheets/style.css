@@ -1,0 +1,74 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.dataWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.table {
+  display: flex;
+  flex-direction: row;
+}
+
+.table > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.table > div > div {
+  width: 250px;
+  text-align: right;
+}
+
+#headerTable {
+  font-weight: bold;
+}
+
+#ampel {
+  width: 50px;
+  padding: 10px;
+  background-color: gray;
+  margin-left: 100px;
+}
+
+.green {
+  background-color: black;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.enabled.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: black;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.enabled.yellow {
+  background-color: yellow;
+}
+
+.red {
+  background-color: black;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.red.enabled {
+  background-color: red;
+}
