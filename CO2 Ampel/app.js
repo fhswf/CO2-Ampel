@@ -7,6 +7,15 @@ let mockValues = 30;
 
 let app = express();
 
+const {InfluxDB} = require('@influxdata/influxdb-client')
+
+// You can generate a Token from the "Tokens Tab" in the UI
+const token = '5FSHhpDzos6J2kxBFGyRO0AdThOWtidRajrpjxUE6zdl-zOb_dfWd6vDS4M3sC2yiRNu5dsfsV1Dwzx6hYfTgA=='
+const org = 'fhswf'
+const bucket = 'timeseries'
+
+const client = new InfluxDB({url: 'http://localhost:8086', token: token})
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
