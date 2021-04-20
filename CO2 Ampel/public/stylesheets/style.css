@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,35 +7,28 @@ a {
   color: #00B7FF;
 }
 
+h1{
+  margin: 20px 0 20px 0;
+}
+
 .dataWrapper {
   display: flex;
   flex-direction: row;
 }
 
-.table {
-  display: flex;
-  flex-direction: row;
+.dataWrapper > div:first-child {
+  flex-grow: 2;
 }
 
-.table > div {
-  display: flex;
-  flex-direction: column;
-}
-
-.table > div > div {
-  width: 250px;
-  text-align: right;
-}
-
-#headerTable {
-  font-weight: bold;
+.dataWrapper > div:nth-child(2) {
+  flex-grow: 1;
 }
 
 #ampel {
-  width: 50px;
   padding: 10px;
   background-color: gray;
   margin-left: 100px;
+  width: 70px;
 }
 
 .green {

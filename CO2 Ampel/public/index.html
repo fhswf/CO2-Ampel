@@ -1,42 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
+
 <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="CO2 Ampel">
+    <meta name="author" content="Julia Warnke">
+
+    <title>CO2 Ampel</title>
+
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/style.css" rel="stylesheet">
     <script>
         function renderData(data){
-            let timestampColumn = document.getElementById("timestampColumn");
-            let co2Column = document.getElementById("co2Column");
-            let tempColumn = document.getElementById("tempColumn");
-            let humidityColumn = document.getElementById("humidityColumn");
-
-            timestampColumn.innerHTML = "";
-            co2Column.innerHTML = "";
-            tempColumn.innerHTML = "";
-            humidityColumn.innerHTML = "";
+            let dataTable = document.getElementById("dataTable");
+            dataTable.innerHTML = "";
 
             for(let element in data.timestamp){
-                let newEL = document.createElement("div")
-                newEL.textContent = new Date(data.timestamp[element]).toUTCString();
-                timestampColumn.appendChild(newEL);
-            }
+                let newEL = document.createElement("tr");
+                let timestamp = document.createElement("td");
+                let co2 = document.createElement("td");
+                let temp = document.createElement("td");
+                let humidity = document.createElement("td");
 
-            for(let element in data.co2){
-                let newEL = document.createElement("div")
-                newEL.textContent = data.co2[element].toString();
-                co2Column.appendChild(newEL);
-            }
+                timestamp.textContent = new Date(data.timestamp[element]).toUTCString();
+                co2.textContent = data.co2[element].toString();
+                temp.textContent = data.temp[element].toString();
+                humidity.textContent = data.humidity[element].toString();
 
-            for(let element in data.temp){
-                let newEL = document.createElement("div")
-                newEL.textContent = data.temp[element].toString();
-                tempColumn.appendChild(newEL);
-            }
-
-            for(let element in data.humidity){
-                let newEL = document.createElement("div")
-                newEL.textContent = data.humidity[element].toString();
-                humidityColumn.appendChild(newEL);
+                newEL.appendChild(timestamp);
+                newEL.appendChild(co2);
+                newEL.appendChild(temp);
+                newEL.appendChild(humidity);
+                dataTable.appendChild(newEL);
             }
         }
 
@@ -50,35 +47,70 @@
 
         window.onload = function() {
             fetchData();
-            setInterval(fetchData, 5000);
         }
     </script>
 </head>
 <body>
-<h1>CO2 Ampel</h1>
-<div class="dataWrapper">
-    <div id="dataContainer">
-        <div id="headerTable" class="table">
-            <div><div>Timestamp</div></div>
-            <div><div>CO2</div></div>
-            <div><div>Temperatur</div></div>
-            <div><div>Feuchtigkeit</div></div>
-        </div>
-        <div id="dataTable" class="table">
-            <div id="timestampColumn"></div>
-            <div id="co2Column"></div>
-            <div id="tempColumn"></div>
-            <div id="humidityColumn"></div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">CO2 Ampel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Über uns</a>
+                </li>
+            </ul>
         </div>
     </div>
-    <div>
-        <div id="ampel">
-            <div class="red"></div>
-            <div class="yellow"></div>
-            <div class="green enabled"></div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>CO2 Ampel</h1>
+            <div class="dataWrapper">
+                <div id="dataContainer">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Zeitpunkt</th>
+                                <th>CO2</th>
+                                <th>Temperatur</th>
+                                <th>Feuchtigkeit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTable">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <div id="ampel">
+                        <div class="red"></div>
+                        <div class="yellow"></div>
+                        <div class="green enabled"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.slim.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>
