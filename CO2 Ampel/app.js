@@ -22,23 +22,41 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/api/data", (req, res) => {
-  let timestampValues = [];
-  let co2values = [];
-  let tempvalues = [];
-  let humidityvalues = [];
+  const queryApi = client.getQueryApi(org);
 
-  for(let i = 0; i < mockValues; i++){
-    co2values.push(Math.floor(Math.random() * 3500));
-    tempvalues.push(Math.floor((Math.random() * 100) - 50));
-    humidityvalues.push(Math.floor(Math.random() * 100));
-    timestampValues.push(new Date().getTime());
-  }
-  res.status(200).send({
-    "timestamp": timestampValues,
-    "co2": co2values,
-    "temp": tempvalues,
-    "humidity": humidityvalues
-  });
+  let start = (req.query.start) ? req.query.start : "-24h";
+  let end = (req.query.end) ? req.query.end : "now()";
+  let limit = (req.query.limit) ? parseInt(req.query.limit) : 200;
+  let results = {};
+
+  const query = `from(bucket: "${bucket}") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r.host == "unit1")`
+    queryApi.queryRows(query, {
+      next(row, tableMeta) {
+        const o = tableMeta.toObject(row);
+
+        if(!(o._time in results)){
+          results[o._time] = {};
+        }
+
+        results[o._time][o._field] = o._value
+      },
+      error(error) {
+        console.error(error)
+        console.log('\\nFinished ERROR')
+        res.sendStatus(500);
+      },
+      complete() {
+        let returnData = [];
+
+        for(let key in results){
+          returnData.push(Object.assign({timestamp: key}, results[key]));
+        }
+
+        returnData.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
+
+        res.send(returnData.slice(0, limit));
+      },
+    })
 });
 
 // catch 404 and forward to error handler
