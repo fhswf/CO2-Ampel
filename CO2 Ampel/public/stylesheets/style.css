@@ -11,6 +11,11 @@ h1{
   margin: 20px 0 20px 0;
 }
 
+label {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
 .dataWrapper {
   display: flex;
   flex-direction: row;
@@ -18,6 +23,7 @@ h1{
 
 .dataWrapper > div:first-child {
   flex-grow: 2;
+  margin-right: 40px;
 }
 
 .dataWrapper > div:nth-child(2) {
@@ -27,7 +33,7 @@ h1{
 #ampel {
   padding: 10px;
   background-color: gray;
-  margin-left: 100px;
+  margin: 0 auto 20px auto;
   width: 70px;
 }
 
