@@ -13,6 +13,37 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
     <script>
+        function getAvg(data){
+            let sum = 0;
+
+            for(let element in data){
+                sum += data[element].co2;
+            }
+
+            return sum / data.length;
+        }
+
+        function changeTrafficLight(data){
+            let avg = getAvg(data);
+            let green = document.getElementById("green_light");
+            let yellow = document.getElementById("yellow_light");
+            let red = document.getElementById("red_light");
+
+            green.classList.remove("enabled");
+            yellow.classList.remove("enabled");
+            red.classList.remove("enabled");
+
+            if(avg < 1000){
+                green.classList.add("enabled");
+            }
+            else if(avg < 2000){
+                yellow.classList.add("enabled");
+            }
+            else {
+                red.classList.add("enabled");
+            }
+        }
+
         function renderData(data){
             let dataTable = document.getElementById("dataTable");
             dataTable.innerHTML = "";
@@ -38,8 +69,6 @@
         }
 
         function fetchData(){
-            console.log(document.getElementById("start_date").value, document.getElementById("start_time").value);
-
             let params = {
                 limit: document.getElementById('limit').value
             };
@@ -57,6 +86,7 @@
             }).then((data) => {
                 console.log(data);
                 renderData(data);
+                changeTrafficLight(data);
             });
         }
 
@@ -112,9 +142,9 @@
                 </div>
                 <div>
                     <div id="ampel">
-                        <div class="red"></div>
-                        <div class="yellow"></div>
-                        <div class="green enabled"></div>
+                        <div id="red_light" class=""></div>
+                        <div id="yellow_light" class=""></div>
+                        <div id="green_light" class="enabled"></div>
                     </div>
                     <div>
                         <label for="start_date">Startzeit:</label>

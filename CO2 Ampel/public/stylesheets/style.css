@@ -31,18 +31,18 @@ h1{
   width: 70px;
 }
 
-.green {
+#green_light {
   background-color: black;
   height: 50px;
   width: 50px;
   border-radius: 50%;
 }
 
-.enabled.green {
+#green_light.enabled {
   background-color: green;
 }
 
-.yellow {
+#yellow_light {
   background-color: black;
   height: 50px;
   width: 50px;
@@ -50,11 +50,11 @@ h1{
   margin-bottom: 5px;
 }
 
-.enabled.yellow {
+#yellow_light.enabled {
   background-color: yellow;
 }
 
-.red {
+#red_light {
   background-color: black;
   height: 50px;
   width: 50px;
@@ -62,6 +62,6 @@ h1{
   margin-bottom: 5px;
 }
 
-.red.enabled {
+#red_light.enabled {
   background-color: red;
 }
