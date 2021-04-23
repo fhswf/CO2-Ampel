@@ -42,7 +42,20 @@
             <h1>CO2 Ampel</h1>
             <div class="dataWrapper">
                 <div id="dataContainer">
-                    <table class="table table-striped">
+                    <div class="mb-3">
+                        <label class="form-check-label w-100 mb-2" for="host_name">Ihr Gerät:</label>
+                        <div class="input-group">
+                            <input class="form-control" id="host_name" name="host_name" type="text" oninput="clearTable()">
+                            <button class="btn-block btn btn-primary mt-3" onclick="fetchData()">Abrufen</button>
+                        </div>
+                    </div>
+                    <div>
+                        <span id="device_not_found" class="hidden alert-danger font-weight-bolder text-lg-left">Es wurde keine ID angegeben.</span>
+                    </div>
+                    <div>
+                        <span id="data_not_found" class="hidden alert-danger font-weight-bolder text-lg-left">Es wurden keine Daten gefunden. Ist ihre ID korrekt oder die Zeitangaben sinnvoll?</span>
+                    </div>
+                    <table id="data_table" class="table table-striped hidden">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Zeitpunkt</th>
@@ -65,19 +78,18 @@
                     <div>
                         <label for="start_date">Startzeit:</label>
                         <div>
-                            <input class="form-control" id="start_date" type="date" name="timestamp" step="1">
-                            <input class="form-control" id="start_time" type="time" name="timestamp" step="1">
+                            <input onchange="clearTable()" class="form-control" id="start_date" type="date" name="timestamp" step="1">
+                            <input onchange="clearTable()" class="form-control" id="start_time" type="time" name="timestamp" step="1">
                         </div>
                         <label for="start_date">Endzeit:</label>
                         <div>
-                            <input class="form-control" id="end_date" type="date" name="timestamp" step="1">
-                            <input class="form-control" id="end_time" type="time" name="timestamp" step="1">
+                            <input onchange="clearTable()" class="form-control" id="end_date" type="date" name="timestamp" step="1">
+                            <input onchange="clearTable()" class="form-control" id="end_time" type="time" name="timestamp" step="1">
                         </div>
                         <label for="limit">Limit:</label>
                         <div>
-                            <input class="form-control" id="limit" type="number" value="200" min="1" max="2000">
+                            <input onchange="clearTable()" class="form-control" id="limit" type="number" value="10" min="1" max="2000">
                         </div>
-                        <button class="btn-block btn btn-primary mt-3" onclick="fetchData()">Fetch</button>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,10 @@ label {
   font-size: 18px;
 }
 
+.hidden {
+  display: none;
+}
+
 .dataWrapper {
   display: flex;
   flex-direction: row;
@@ -70,4 +74,19 @@ label {
 
 #red_light.enabled {
   background-color: red;
+}
+
+@media (max-width: 800px) {
+  .dataWrapper {
+    flex-direction: column-reverse;
+  }
+
+  .dataWrapper > div:first-child {
+    margin-right: 0;
+  }
+
+  .container {
+    max-width: None;
+    padding: 0 30px;
+  }
 }

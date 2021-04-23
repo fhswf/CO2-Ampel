@@ -14,7 +14,6 @@ const {InfluxDB} = require('@influxdata/influxdb-client')
 const token = config.influxToken;
 const org = config.influxOrg;
 const bucket = config.influxBucket;
-const influxHost = config.influxHost;
 
 const client = new InfluxDB({url: config.influxUrl, token: token});
 
@@ -26,12 +25,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get("/api/data", (req, res) => {
   const queryApi = client.getQueryApi(org);
 
-  let start = (req.query.start) ? req.query.start : "-24h";
+  let start = (req.query.start) ? req.query.start : "-1h";
   let end = (req.query.end) ? req.query.end : "now()";
   let limit = (req.query.limit) ? parseInt(req.query.limit) : 200;
-  let results = {};
+  let influxHost = req.query.host;
 
-  const query = `from(bucket: "${bucket}") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r.host == "${influxHost}")`
+  if(!influxHost) {
+    res.sendStatus(400);
+  } else {
+    let results = {};
+
+    const query = `from(bucket: "${bucket}") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r.host == "${influxHost}")`
     queryApi.queryRows(query, {
       next(row, tableMeta) {
         const o = tableMeta.toObject(row);
@@ -44,7 +48,6 @@ app.get("/api/data", (req, res) => {
       },
       error(error) {
         console.error(error)
-        console.log('\\nFinished ERROR')
         res.sendStatus(500);
       },
       complete() {
@@ -59,6 +62,7 @@ app.get("/api/data", (req, res) => {
         res.send(returnData.slice(0, limit));
       },
     })
+  }
 });
 
 // catch 404 and forward to error handler

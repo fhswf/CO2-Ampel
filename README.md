@@ -23,9 +23,8 @@ Die Ampel interpretiert die Werte auf folgende Weise:
     - Zugriffstoken eintragen
     - Namen der Organisation eintragen
     - Bucket eintragen
-    - Host eintragen unter welchem die betrachteten Datensätze abgelegt wurden.
 5. Starten der Anwendung mit dem Befehl "node bin\www" im CO2-Ampel Unterverzeichnis.
 
 ## Ablegen von Daten
 
-Daten können in InfluxDB sehr einfach abgelegt werden und die Datenbank liefert viele Tutorials für unterschiedliche Sprachen. Im Unterverzeichnis "CO2DataWriter" wird ein beispielhaftes Skript mit Zufallszahlen für Python mitgeliefert. Bitte halten sie beim Schreiben von Daten immer den in der config.js angegebenen Host ein und nutzen Sie die Feldnamen "co2", temp" und "humidity" für die Daten zur CO2-Konzentration, Temperatur und Feuchtigkeit. Alle Daten können als Gleitkommazahlen oder Integer angegeben werden.
+Daten können in InfluxDB sehr einfach abgelegt werden und die Datenbank liefert viele Tutorials für unterschiedliche Sprachen. Im Unterverzeichnis "CO2DataWriter" wird ein beispielhaftes Skript mit Zufallszahlen für Python mitgeliefert. Nutzen Sie die Feldnamen "co2", temp" und "humidity" für die Daten zur CO2-Konzentration, Temperatur und Feuchtigkeit. Für die Angabe der Geräte nutzen Sie bitte das Tag "host". Alle Daten können als Gleitkommazahlen oder Integer angegeben werden.
