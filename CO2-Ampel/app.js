@@ -3,18 +3,20 @@ let express = require('express');
 let path = require('path');
 let logger = require('morgan');
 
-let mockValues = 30;
+const config = require("./config")
 
 let app = express();
 
 const {InfluxDB} = require('@influxdata/influxdb-client')
 
 // You can generate a Token from the "Tokens Tab" in the UI
-const token = '5FSHhpDzos6J2kxBFGyRO0AdThOWtidRajrpjxUE6zdl-zOb_dfWd6vDS4M3sC2yiRNu5dsfsV1Dwzx6hYfTgA=='
-const org = 'fhswf'
-const bucket = 'timeseries'
 
-const client = new InfluxDB({url: 'http://localhost:8086', token: token})
+const token = config.influxToken;
+const org = config.influxOrg;
+const bucket = config.influxBucket;
+const influxHost = config.influxHost;
+
+const client = new InfluxDB({url: config.influxUrl, token: token});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -29,7 +31,7 @@ app.get("/api/data", (req, res) => {
   let limit = (req.query.limit) ? parseInt(req.query.limit) : 200;
   let results = {};
 
-  const query = `from(bucket: "${bucket}") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r.host == "unit1")`
+  const query = `from(bucket: "${bucket}") |> range(start: ${start}, stop: ${end}) |> filter(fn: (r) => r.host == "${influxHost}")`
     queryApi.queryRows(query, {
       next(row, tableMeta) {
         const o = tableMeta.toObject(row);
@@ -52,7 +54,7 @@ app.get("/api/data", (req, res) => {
           returnData.push(Object.assign({timestamp: key}, results[key]));
         }
 
-        returnData.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
+        returnData.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);
 
         res.send(returnData.slice(0, limit));
       },
