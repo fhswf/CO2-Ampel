@@ -9,97 +9,107 @@
     <meta name="author" content="Julia Warnke">
 
     <title>CO2 Ampel</title>
-
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="stylesheets/style.css" rel="stylesheet">
-    <script src="js/main.js"></script>
+    <base href="https://jupiter.fh-swf.de/CO2-Ampel/">
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./stylesheets/style.css" rel="stylesheet">
+    <script src="./js/main.js"></script>
 </head>
+
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">CO2 Ampel</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-            </ul>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">CO2 Ampel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<!-- Page Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <h1>CO2 Ampel</h1>
-            <div class="dataWrapper">
-                <div id="dataContainer">
-                    <div class="mb-3">
-                        <label class="form-check-label w-100 mb-2" for="host_name">Ihr Gerät:</label>
-                        <div class="input-group">
-                            <input class="form-control" id="host_name" name="host_name" type="text" oninput="clearTable()">
-                            <button class="btn-block btn btn-primary mt-3" onclick="fetchData()">Abrufen</button>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>CO2 Ampel</h1>
+                <div class="dataWrapper">
+                    <div id="dataContainer">
+                        <div class="mb-3">
+                            <label class="form-check-label w-100 mb-2" for="host_name">Ihr Gerät:</label>
+                            <div class="input-group">
+                                <input class="form-control" id="host_name" name="host_name" type="text"
+                                    oninput="clearTable()">
+                                <button class="btn-block btn btn-primary mt-3" onclick="fetchData()">Abrufen</button>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <span id="device_not_found" class="hidden alert-danger font-weight-bolder text-lg-left">Es wurde keine ID angegeben.</span>
-                    </div>
-                    <div>
-                        <span id="data_not_found" class="hidden alert-danger font-weight-bolder text-lg-left">Es wurden keine Daten gefunden. Ist ihre ID korrekt oder die Zeitangaben sinnvoll?</span>
-                    </div>
-                    <table id="data_table" class="table table-striped hidden">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Zeitpunkt</th>
-                                <th>CO2</th>
-                                <th>Temperatur</th>
-                                <th>Feuchtigkeit</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dataTable">
+                        <div>
+                            <span id="device_not_found" class="hidden alert-danger font-weight-bolder text-lg-left">Es
+                                wurde keine ID angegeben.</span>
+                        </div>
+                        <div>
+                            <span id="data_not_found" class="hidden alert-danger font-weight-bolder text-lg-left">Es
+                                wurden keine Daten gefunden. Ist ihre ID korrekt oder die Zeitangaben sinnvoll?</span>
+                        </div>
+                        <table id="data_table" class="table table-striped hidden">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Zeitpunkt</th>
+                                    <th>CO2</th>
+                                    <th>Temperatur</th>
+                                    <th>Feuchtigkeit</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTable">
 
-                        </tbody>
-                    </table>
-                </div>
-                <div>
-                    <div id="ampel">
-                        <div id="red_light" class=""></div>
-                        <div id="yellow_light" class=""></div>
-                        <div id="green_light" class="enabled"></div>
+                            </tbody>
+                        </table>
                     </div>
                     <div>
-                        <label for="start_date">Startzeit:</label>
-                        <div>
-                            <input onchange="clearTable()" class="form-control" id="start_date" type="date" name="timestamp" step="1">
-                            <input onchange="clearTable()" class="form-control" id="start_time" type="time" name="timestamp" step="1">
+                        <div id="ampel">
+                            <div id="red_light" class=""></div>
+                            <div id="yellow_light" class=""></div>
+                            <div id="green_light" class="enabled"></div>
                         </div>
-                        <label for="start_date">Endzeit:</label>
                         <div>
-                            <input onchange="clearTable()" class="form-control" id="end_date" type="date" name="timestamp" step="1">
-                            <input onchange="clearTable()" class="form-control" id="end_time" type="time" name="timestamp" step="1">
-                        </div>
-                        <label for="limit">Limit:</label>
-                        <div>
-                            <input onchange="clearTable()" class="form-control" id="limit" type="number" value="10" min="1" max="2000">
+                            <label for="start_date">Startzeit:</label>
+                            <div>
+                                <input onchange="clearTable()" class="form-control" id="start_date" type="date"
+                                    name="timestamp" step="1">
+                                <input onchange="clearTable()" class="form-control" id="start_time" type="time"
+                                    name="timestamp" step="1">
+                            </div>
+                            <label for="start_date">Endzeit:</label>
+                            <div>
+                                <input onchange="clearTable()" class="form-control" id="end_date" type="date"
+                                    name="timestamp" step="1">
+                                <input onchange="clearTable()" class="form-control" id="end_time" type="time"
+                                    name="timestamp" step="1">
+                            </div>
+                            <label for="limit">Limit:</label>
+                            <div>
+                                <input onchange="clearTable()" class="form-control" id="limit" type="number" value="10"
+                                    min="1" max="2000">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.slim.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.slim.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
