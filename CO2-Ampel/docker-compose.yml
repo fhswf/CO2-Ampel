@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  app:
+    container_name: CO2-Ampel
+    restart: always
+    build: .
+    env_file:
+      - docker.env
+    ports:
+      - "127.0.0.1:4711:3000"
+    links:
+      - ampel-influxdb
+
+  ampel-influxdb:
+    container_name: ampel-influxdb
+    image: influxdb:2.0.4
+    env_file:
+      - docker.env
+    volumes:
+      - /opt/co2ampel/data:/root/.influxdb2
+    ports:
+      - 8086:8086
