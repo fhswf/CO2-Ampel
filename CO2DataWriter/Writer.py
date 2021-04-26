@@ -6,7 +6,7 @@ from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 # You can generate a Token from the "Tokens Tab" in the UI
-token = "5FSHhpDzos6J2kxBFGyRO0AdThOWtidRajrpjxUE6zdl-zOb_dfWd6vDS4M3sC2yiRNu5dsfsV1Dwzx6hYfTgA=="
+token = ""
 org = "fhswf"
 bucket = "timeseries"
 
