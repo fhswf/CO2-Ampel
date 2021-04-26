@@ -43,7 +43,7 @@ docker-compose build
 docker-compose create
 ```
 
-gestartet werden.
+starten.
 
 ## "klassische" Installation
 
