@@ -9,7 +9,7 @@
     <meta name="author" content="Julia Warnke">
 
     <title>CO2 Ampel</title>
-    <base href="https://jupiter.fh-swf.de/CO2-Ampel/">
+    <!--<base href="https://jupiter.fh-swf.de/CO2-Ampel/">-->
     <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="./stylesheets/style.css" rel="stylesheet">
     <script src="./js/main.js"></script>
@@ -83,21 +83,21 @@
                         <div>
                             <label for="start_date">Startzeit:</label>
                             <div>
-                                <input onchange="clearTable()" class="form-control" id="start_date" type="date"
+                                <input onchange="hideTable()" class="form-control" id="start_date" type="date"
                                     name="timestamp" step="1">
-                                <input onchange="clearTable()" class="form-control" id="start_time" type="time"
+                                <input onchange="hideTable()" class="form-control" id="start_time" type="time"
                                     name="timestamp" step="1">
                             </div>
                             <label for="start_date">Endzeit:</label>
                             <div>
-                                <input onchange="clearTable()" class="form-control" id="end_date" type="date"
+                                <input onchange="hideTable()" class="form-control" id="end_date" type="date"
                                     name="timestamp" step="1">
-                                <input onchange="clearTable()" class="form-control" id="end_time" type="time"
+                                <input onchange="hideTable()" class="form-control" id="end_time" type="time"
                                     name="timestamp" step="1">
                             </div>
                             <label for="limit">Limit:</label>
                             <div>
-                                <input onchange="clearTable()" class="form-control" id="limit" type="number" value="10"
+                                <input onchange="hideTable()" class="form-control" id="limit" type="number" value="10"
                                     min="1" max="2000">
                             </div>
                         </div>

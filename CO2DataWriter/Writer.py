@@ -15,7 +15,9 @@ client = InfluxDBClient(url="http://localhost:8086", token=token)
 
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
-
+"""
+Writes random data in predefined ranges to the influx db.
+"""
 def write_data():
     co2 = randint(0, 3500)
     temp = randint(-50, 50)
