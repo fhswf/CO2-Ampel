@@ -60,3 +60,13 @@ starten.
 ## Ablegen von Daten
 
 Daten können in InfluxDB sehr einfach abgelegt werden und die Datenbank liefert viele Tutorials für unterschiedliche Sprachen. Im Unterverzeichnis "CO2DataWriter" wird ein beispielhaftes Skript mit Zufallszahlen für Python mitgeliefert. Nutzen Sie die Feldnamen "co2", temp" und "humidity" für die Daten zur CO2-Konzentration, Temperatur und Feuchtigkeit. Für die Angabe der Geräte nutzen Sie bitte das Tag "host". Alle Daten können als Gleitkommazahlen oder Integer angegeben werden.
+
+## Starten der Testumgebung Cypress
+
+```shell
+cd e2e
+npm install
+npm run cypress
+```
+
+Bevor Tests ausgeführt werden, sollte sichergestellt sein, dass die Webanwendung unter localhost:3000 läuft.
