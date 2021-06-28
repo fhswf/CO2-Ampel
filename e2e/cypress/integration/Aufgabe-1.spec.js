@@ -23,13 +23,15 @@ context("Aufgabe 1: Wir bauen eine Ampel in die App ein.", () => {
     });
   });
 
-  describe("Die CO2-Ampel sollte die richtige Größe von 70px Breite und 180px Höhe haben.", () => {
+  describe("Die CO2-Ampel sollte die richtige Größe von ca. 70px Breite und 180px Höhe haben.", () => {
     it("Das Element mit der ID 'ampel' hat eine Breite von 70px.", () => {
-      cy.get("#ampel").invoke("outerWidth").should("eq", 70);
+      cy.get("#ampel").invoke("outerWidth").should("be.lessThan", 80);
+      cy.get("#ampel").invoke("outerWidth").should("be.greaterThan", 60);
     });
 
     it("Das Element mit der ID 'ampel' hat eine Breite von 180px.", () => {
-      cy.get("#ampel").invoke("outerHeight").should("eq", 180);
+      cy.get("#ampel").invoke("outerHeight").should("be.lessThan", 190);
+      cy.get("#ampel").invoke("outerHeight").should("be.greaterThan", 170);
     });
   });
 
