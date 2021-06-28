@@ -34,48 +34,6 @@ label {
   flex-grow: 1;
 }
 
-#ampel {
-  padding: 10px;
-  background-color: gray;
-  margin: 0 auto 20px auto;
-  width: 70px;
-}
-
-#green_light {
-  background-color: black;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-}
-
-#green_light.enabled {
-  background-color: green;
-}
-
-#yellow_light {
-  background-color: black;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  margin-bottom: 5px;
-}
-
-#yellow_light.enabled {
-  background-color: yellow;
-}
-
-#red_light {
-  background-color: black;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  margin-bottom: 5px;
-}
-
-#red_light.enabled {
-  background-color: red;
-}
-
 @media (max-width: 800px) {
   .dataWrapper {
     flex-direction: column-reverse;

@@ -9,20 +9,9 @@ function changeTrafficLight(data) {
 	//Get Data of the Table for the lights
 	let lastElement = data[0].co2;
 
-	turnOffLights();
+	// Füge hier drunter deinen Code ein!
 
-	//Trafficlight Green
-    if (lastElement < 1000) {
-		turnGreen();
-    }
-	//Trafficlight Yellow
-    else if (lastElement < 2000) {
-        turnYellow();
-    }
-	//Trafficlight Red
-    else {
-		turnRed();
-    }
+	
 }
 
 //Turns off all the lights
