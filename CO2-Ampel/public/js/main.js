@@ -52,9 +52,12 @@ function renderData(data) {
             let humidity = document.createElement("td");
 
             timestamp.textContent = new Date(data[element].timestamp).toUTCString();
-            co2.textContent = data[element].co2.toString();
-            temp.textContent = data[element].temp.toString();
-            humidity.textContent = data[element].humidity.toString();
+            if (data[element].co2)
+                co2.textContent = data[element].co2.toString();
+            if (data[element].temp)
+                temp.textContent = data[element].temp.toString();
+            if (data[element].humidity)
+                humidity.textContent = data[element].humidity.toString();
 
             newEL.appendChild(timestamp);
             newEL.appendChild(co2);
